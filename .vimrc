@@ -6,6 +6,9 @@ endif
 
 filetype plugin indent on
 
+set t_u7=
+set ambw=double
+
 " tab options
 set expandtab
 set shiftwidth=4
@@ -20,6 +23,7 @@ set background=dark
 set signcolumn=yes
 set termguicolors
 set colorcolumn=80
+set backspace=indent,eol,start
 
 " search options
 set incsearch
@@ -41,7 +45,7 @@ nnoremap <silent> <C-]> :Vexplore       <CR>
 nnoremap <silent> <C-\> :Vexplore!      <CR>
 
 " Set the <leader> key
-let mapleader = " "
+let mapleader = "["
 
 " netrw options
 let g:netrw_liststyle = 3
@@ -113,6 +117,7 @@ let g:ale_cpp_clangtidy_checks = ['*,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-m
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'vim-scripts/a.vim', {'for': ['cpp', 'c']}
 Plug 'dense-analysis/ale', {'for': ['cpp', 'c']}
 Plug 'jiangmiao/auto-pairs'
 Plug 'universal-ctags/ctags'
@@ -129,6 +134,9 @@ Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 "Plug 'ap/vim-buftabline'
+Plug 'google/vim-codefmt', {'for': ['cpp', 'c']}
+Plug 'google/vim-maktaba', {'for': ['cpp', 'c']}
+Plug 'google/vim-glaive', {'for': ['cpp', 'c']}
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-fugitive'
 Plug 'shirk/vim-gas'
