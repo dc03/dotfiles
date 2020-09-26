@@ -22,7 +22,7 @@ set relativenumber
 set background=dark
 set signcolumn=yes
 set termguicolors
-set colorcolumn=80
+set colorcolumn=80,120
 set backspace=indent,eol,start
 
 " search options
@@ -34,6 +34,9 @@ set laststatus=2
 set showtabline=2
 set noshowmode
 
+setlocal conceallevel=2
+set concealcursor=nciv
+
 source ~/.vim/autoload/vim-plug/plug.vim
 
 " Keybindings
@@ -43,6 +46,10 @@ nnoremap <silent> <C-A> :TagbarToggle   <CR>
 nnoremap <silent> <CR>  :nohlsearch     <CR><CR>
 nnoremap <silent> <C-]> :Vexplore       <CR>
 nnoremap <silent> <C-\> :Vexplore!      <CR>
+
+imap jk <ESC>
+imap jkw <ESC>:wa<RETURN>
+imap jkwq <ESC>:wqa<RETURN>
 
 " Set the <leader> key
 let mapleader = "["
@@ -111,8 +118,10 @@ let g:lightline = {
             \ }
 
 " ale options
-let g:ale_cpp_clang_options = '-Wall -Wextra -pedantic -std=c++17'
-let g:ale_cpp_gcc_options = '-Wall -Wextra -pedantic -std=c++17'
+let g:ale_cpp_cc_options = '-Wall -Wextra -Wpedantic -std=c++17'
+let g:ale_cpp_clang_options = '-Wall -Wextra -Wpedantic -std=c++17'
+let g:ale_cpp_gcc_options = '-Wall -Wextra -Wpedantic -std=c++17'
+let g:ale_cpp_clangtidy_options = '-Wall -Wextra -Wpedantic -std=c++17'
 let g:ale_cpp_clangtidy_checks = ['*,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-modernize-use-trailing-return-type,-llvm-*']
 
 call plug#begin('~/.vim/plugged')
@@ -140,7 +149,7 @@ Plug 'google/vim-glaive', {'for': ['cpp', 'c']}
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-fugitive'
 Plug 'shirk/vim-gas'
-"Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-unimpaired'
