@@ -47,9 +47,9 @@ nnoremap <silent> <CR>  :nohlsearch     <CR><CR>
 nnoremap <silent> <C-]> :Vexplore       <CR>
 nnoremap <silent> <C-\> :Vexplore!      <CR>
 
-imap jk <ESC>
-imap jkw <ESC>:wa<RETURN>
-imap jkwq <ESC>:wqa<RETURN>
+imap jj <ESC>
+imap jjw <ESC>:wa<RETURN>
+imap jjwq <ESC>:wqa<RETURN>
 
 " Set the <leader> key
 let mapleader = "["
@@ -151,6 +151,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'shirk/vim-gas'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
