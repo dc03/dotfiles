@@ -74,7 +74,7 @@ font-4 = Termsynu:size=10;0
 
 modules-left = dwm
 modules-center =
-modules-right = pulseaudio memory cpu wlan eth battery date powermenu
+modules-right = pulseaudio memory cpu wlan eth backlight battery date powermenu
 ; xbacklight alsa temperature
 
 tray-position = right
@@ -220,27 +220,44 @@ label-song-maxlen = 25
 label-song-ellipsis = true
 label-song-foreground = ${colors.foreground}
 
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
+[module/backlight]
 type = internal/backlight
+
+format = <label> <ramp>
+
+label = bl %percentage%%
+label-underline = ${colors.underline-color}
+
+ramp-0 = ▁
+ramp-1 = ▂
+ramp-2 = ▃
+ramp-3 = ▄
+ramp-4 = ▅
+ramp-5 = ▆
+ramp-6 = ▇
+ramp-7 = █
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
 card = amdgpu_bl0
+
+; (unreleased)
+; Use the `/sys/class/backlight/actual-brightness` file
+; rather than the regular `brightness` file.
+; Defaults to true unless the specified card is an amdgpu backlight.
+use-actual-brightness = true
+
+; Enable changing the backlight with the scroll wheel
+; NOTE: This may require additional configuration on some systems. Polybar will
+; write to `/sys/class/backlight/${self.card}/brightness` which requires polybar
+; to have write access to that file.
+; DO NOT RUN POLYBAR AS ROOT. 
+; The recommended way is to add the user to the
+; `video` group and give that group write-privileges for the `brightness` file.
+; See the ArchWiki for more information:
+; https://wiki.archlinux.org/index.php/Backlight#ACPI
+; Default: false
+enable-scroll = true
 
 [module/cpu]
 type = internal/cpu
