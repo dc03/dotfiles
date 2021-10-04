@@ -8,6 +8,8 @@ filetype plugin indent on
 
 set t_u7=
 set ambw=double
+set nowrap
+set encoding=UTF-8
 
 " tab options
 set expandtab
@@ -24,6 +26,7 @@ set signcolumn=yes
 set termguicolors
 set colorcolumn=80,120
 set backspace=indent,eol,start
+set cursorline
 
 " search options
 set incsearch
@@ -118,14 +121,19 @@ let g:lightline = {
             \ }
 
 " ale options
-let g:ale_cpp_cc_options = '-Wall -Wextra -Wpedantic -std=c++17'
-let g:ale_cpp_clang_options = '-Wall -Wextra -Wpedantic -std=c++17'
-let g:ale_cpp_gcc_options = '-Wall -Wextra -Wpedantic -std=c++17'
-let g:ale_cpp_clangtidy_options = '-Wall -Wextra -Wpedantic -std=c++17'
-let g:ale_cpp_clangtidy_checks = ['*,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-modernize-use-trailing-return-type,-llvm-*']
+let g:ale_cpp_cc_options = '-Wall -Wextra -Wpedantic -std=c++20'
+let g:ale_cpp_clang_options = '-Wall -Wextra -Wpedantic -std=c++20'
+let g:ale_cpp_gcc_options = '-Wall -Wextra -Wpedantic -std=c++20'
+let g:ale_cpp_clangtidy_options = '-Wall -Wextra -Wpedantic -std=c++20'
+let g:ale_cpp_clangtidy_checks = ['*,-cppcoreguidelines-explicit-virtual-functions,-hicpp-use-override,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-modernize-use-trailing-return-type,-llvm-*,-llvmlibc-*,-modernize-use-override']
+let g:ale_cpp_clangcheck_executable = ''
+
+" slime options
+let g:slime_target = "tmux"
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'vim-scripts/a.vim', {'for': ['cpp', 'c']}
 Plug 'dense-analysis/ale', {'for': ['cpp', 'c']}
 Plug 'jiangmiao/auto-pairs'
@@ -134,6 +142,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale', {'for': ['cpp', 'c']}
 Plug 'mengelbrecht/lightline-bufferline'
@@ -146,10 +155,13 @@ Plug 'majutsushi/tagbar'
 Plug 'google/vim-codefmt', {'for': ['cpp', 'c']}
 Plug 'google/vim-maktaba', {'for': ['cpp', 'c']}
 Plug 'google/vim-glaive', {'for': ['cpp', 'c']}
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
 Plug 'tpope/vim-fugitive'
-Plug 'shirk/vim-gas'
+Plug 'shirk/vim-gas', {'for': ['s', 'asm']}
 Plug 'airblade/vim-gitgutter'
+Plug 'jpalardy/vim-slime'
+Plug 'psliwka/vim-smoothie'
+Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bronson/vim-trailing-whitespace'

@@ -7,11 +7,11 @@ unsetopt nomatch
 bindkey -e
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#403f4c,underline"
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#403f4c,underline"
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/pi/.zshrc'
+zstyle :compinstall filename '/home/dc/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -22,7 +22,7 @@ autoload -Uz vcs_info
 precmd() { vcs_info }
 
 EDITOR='vim'
-# PATH='/sbin:/home/pi/.cargo/bin:'$PATH
+PATH=$PATH:~/.cargo/bin:~/.local/bin:~/.local/share/gem/ruby/2.7.0/bin:~/go/bin/
 
 setopt promptsubst
 
@@ -56,14 +56,43 @@ alias l='ls -lha'
 alias gc='pushd ~/GIT && git clone'
 alias gnc='git clone'
 alias ls='ls --color=auto'
+alias bat='cat /sys/class/power_supply/BAT0/capacity'
 
 alias del='trash'
 alias rm='echo Use del or use full path /bin/rm'
 
 alias wpm='python3 -m wpm'
 alias vi='~/GIT/heirloom-ex-vi/ex -v'
-
-alias perf='perf_4.18'
-alias temp='vcgencmd measure_temp'
+alias emacs='emacs -nw'
+alias upload-zip='curl --user Dhruv: smb://192.168.100.211/Public/ -T'
 
 source ~/GIT/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+alias htpo=htop
+alias hpto=htop
+alias hpot=htop
+alias hotp=htop
+alias hopt=htop
+alias thop=htop
+alias thpo=htop
+alias tpoh=htop
+alias tpho=htop
+alias tohp=htop
+alias toph=htop
+alias phot=htop
+alias phto=htop
+alias ptho=htop
+alias ptoh=htop
+alias poth=htop
+alias poht=htop
+alias opht=htop
+alias opth=htop
+alias otph=htop
+alias othp=htop
+alias ohtp=htop
+alias ohpt=htop
+# -- START ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
+export PATH="/home/dc/.cache/activestate/bin:$PATH"
+# -- STOP ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
+alias minecraft='java -jar /mnt/gorbage/TLauncher-2.82/TLauncher-2.82.jar'
+alias vim='vim -T xterm_256color'
