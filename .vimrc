@@ -82,7 +82,7 @@ let g:lightline#bufferline#show_number = 1
 let g:ligthline#bufferline#shorten_path = 0
 let g:lightline#bufferline#unnamed = '[No Name]'
 let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
+            \ 'colorscheme': 'everforest',
             \ 'active': {
             \     'left': [
             \         ['mode', 'paste'],
@@ -131,6 +131,21 @@ let g:ale_cpp_clangcheck_executable = ''
 " slime options
 let g:slime_target = "tmux"
 
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_method = 'latexmk'
+let localleader = ','
+let g:vimtex_compiler_latexmk = {
+      \ 'options' : [
+      \   '-shell-escape' ,
+      \   '-verbose' ,
+      \   '-file-line-error',
+      \   '-synctex=1' ,
+      \   '-interaction=nonstopmode' ,
+      \ ],
+      \}
+
+let g:everforest_background = 'soft'
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -138,6 +153,7 @@ Plug 'vim-scripts/a.vim', {'for': ['cpp', 'c']}
 Plug 'dense-analysis/ale', {'for': ['cpp', 'c']}
 Plug 'jiangmiao/auto-pairs'
 Plug 'universal-ctags/ctags'
+Plug 'sainnhe/everforest'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
@@ -164,13 +180,14 @@ Plug 'psliwka/vim-smoothie'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-surround'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'lervag/vimtex'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
-colo gruvbox
+colorscheme everforest
 
 " autocmd vimenter * exe 'silent! botright 10 split temp'
 " autocmd vimenter * vertical terminal ++rows=15 ++curwin
