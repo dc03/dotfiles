@@ -47,31 +47,61 @@ function set_high {
     light -S 35
 }
 
+function print_usage {
+    echo "Usage: $0 [TYPE] [ARGUMENT]"
+    echo ""
+    echo "TYPE: cpu, battery"
+    echo ""
+    echo "ARGUMENT:"
+    echo "    cpu:     low, med, high, low_16, med_16, high_16"
+    echo "    battery: conserve_on, conserve_off"
+}
+
 case $1 in
-    "low")
-        sudo /home/dc/.local/bin/cpumgr.sh 8 offline
-        set_low
+    "cpu")
+        case $2 in
+            "low")
+                sudo /home/dc/.local/bin/cpumgr.sh 8 offline
+                set_low
+                ;;
+            "med")
+                sudo /home/dc/.local/bin/cpumgr.sh 8 online
+                set_med
+                ;;
+            "high")
+                sudo /home/dc/.local/bin/cpumgr.sh 8 online
+                set_high
+                ;;
+            "low_16")
+                set_low
+                ;;
+            "med_16")
+                set_med
+                ;;
+            "high_16")
+                set_high
+                ;;
+            *)
+                print_usage
+                ;;
+        esac
         ;;
-    "med")
-        sudo /home/dc/.local/bin/cpumgr.sh 8 online
-        set_med
-        ;;
-    "high")
-        sudo /home/dc/.local/bin/cpumgr.sh 8 online
-        set_high
-        ;;
-    "low_16")
-        set_low
-        ;;
-    "med_16")
-        set_med
-        ;;
-    "high_16")
-        set_high
+    "battery")
+        case $2 in
+            "conserve_on")
+                sudo sh -c 'echo 1 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode'
+                sudo /home/dc/GIT/battmngr/battmngr -rc
+                ;;
+            "conserve_off")
+                sudo sh -c 'echo 0 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode'
+                sudo /home/dc/GIT/battmngr/battmngr -rc
+                ;;
+            *)
+                print_usage
+                ;;
+        esac
         ;;
     *)
-        echo "Usage: $0 [option]"
-        echo
-        echo "option: low, med, high, low_16, med_16, high_16"
+        print_usage
         ;;
 esac
