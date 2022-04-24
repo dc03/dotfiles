@@ -117,4 +117,4 @@ alias mc='use-nvidia "java -jar /mnt/gorbage/TLauncher-2.82/TLauncher-2.82.jar"'
 export CLASSPATH=/home/dc/Downloads/Executable/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar:$CLASSPATH
 
 alias cat=batcat
-alias lock='DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/10-14-Night-6k.jpg'
+alias lock='DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/4roxk1nqz4911.png'
