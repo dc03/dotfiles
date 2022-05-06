@@ -4,7 +4,7 @@ HISTSIZE=2000
 SAVEHIST=2000
 setopt appendhistory extendedglob notify
 unsetopt nomatch
-bindkey -e
+bindkey -v
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#403f4c,underline"

@@ -230,7 +230,7 @@ type = internal/backlight
 format = <label> <ramp>
 
 label = bl %percentage%%
-label-underline = ${colors.underline-color}
+format-underline = ${colors.underline-color}
 
 ramp-0 = ▁
 ramp-1 = ▂
@@ -395,7 +395,7 @@ type = internal/pulseaudio
 format-volume = <label-volume> <ramp-volume>
 label-volume = vol %percentage:3%%
 label-volume-foreground = ${root.foreground}
-label-volume-underline = ${colors.underline-color}
+format-volume-underline = ${colors.underline-color}
 
 ramp-volume-0 = ▁
 ramp-volume-1 = ▂
