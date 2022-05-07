@@ -1,6 +1,7 @@
 #!/usr/bin/env -S bash --norc
 
 function ask_mode {
+    sudo sudo > /dev/null 2>&1
     printf "[INFO] Mode: "
     sudo /home/dc/GIT/battmngr/battmngr -r
     echo "[INFO] Please use Fn + Q to set mode and press enter when done"
@@ -26,7 +27,7 @@ function ryzenadj_high {
 function set_low {
     ask_mode
     ryzenadj_low
-    sudo cpupower frequency-set --governor powersave
+    sudo cpupower frequency-set --governor schedutil
     sudo cpupower frequency-set --max 1.40GHz
     light -S 15
 }
