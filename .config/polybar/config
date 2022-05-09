@@ -75,7 +75,7 @@ font-4 = Termsynu:size=10;0
 
 modules-left = dwm
 modules-center =
-modules-right = pulseaudio memory cpu wlan eth backlight battery date powermenu
+modules-right = pulseaudio memory cpu cpufreq wlan eth backlight battery date powermenu
 ; xbacklight alsa temperature
 
 tray-position = right
@@ -548,6 +548,18 @@ menu-2-0 = power off
 menu-2-0-exec = systemctl poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/cpufreq]
+type = custom/script
+
+format = <label>
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+format-underline = ${colors.underline-color}
+format-padding = 0
+
+exec = '/home/dc/.local/bin/avg-cpu.sh'
+interval = 3
 
 [settings]
 screenchange-reload = true
