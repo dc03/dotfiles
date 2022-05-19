@@ -75,7 +75,7 @@ font-4 = Termsynu:size=10;0
 
 modules-left = dwm
 modules-center =
-modules-right = pulseaudio memory cpu cpufreq wlan eth backlight battery date powermenu
+modules-right = pulseaudio memory cpu cpufreq wlan eth backlight battery date cfg
 ; xbacklight alsa temperature
 
 tray-position = right
@@ -94,6 +94,19 @@ override-redirect = false
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/toggle]
+type = custom/menu
+
+format-spacing = 1
+label-open = toggle
+label-close = close
+label-separator = |
+
+menu-0-0 = mem
+menu-0-0-exec = #memory.module_toggle
+menu-0-1 = cpu
+menu-0-1-exec = #cpu.module_toggle
 
 [module/xwindow]
 type = internal/xwindow
@@ -130,7 +143,7 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/dwm
 format = <label-tags> <label-layout>
 ; Path to dwm socket (default: /tmp/dwm.sock)
-; socket-path = /tmp/dwm.sock
+socket-path = /tmp/dwm.sock
 
 ; Left-click to view tag, right-click to toggle tag view
 enable-tags-click = true
@@ -143,9 +156,9 @@ tags-scroll-reverse = false
 ; If true and enable-tags-scroll = true, wrap active tag when scrolling
 tags-scroll-wrap = true
 ; Left-click to set secondary layout, right-click to switch to previous layout
-enable-layout-click = false
+enable-layout-click = true
 ; Scroll to cycle between available layouts
-enable-layout-scroll = false
+enable-layout-scroll = true
 ; Wrap when scrolling and reaching begining/end of layouts
 layout-scroll-wrap = false
 ; Reverse scroll direction
@@ -360,7 +373,7 @@ ramp-signal-foreground = ${colors.xcolor3}
 
 [module/eth]
 type = internal/network
-interface = virbr0
+interface = virbr1
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -520,34 +533,38 @@ label-warn-foreground = ${colors.secondary}
 
 ramp-foreground = ${colors.foreground-alt}
 
-[module/powermenu]
+[module/cfg]
 type = custom/menu
 
-expand-right = true
-
 format-spacing = 1
-
-label-open = ⏻
-label-open-foreground = ${colors.secondary}
-label-close = cancel
+format-underline = ${colors.underline-color}
+label-open = menu
+label-open-foreground = ${colors.foreground}
+label-close = x
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
+menu-0-0 = dnd
+menu-0-0-exec = #cfg.open.1
+menu-0-1 = power
+menu-0-1-exec = #cfg.open.2
 
-menu-1-0 = reboot
-menu-1-0-exec = systemctl reboot
-menu-1-1 = cancel
-menu-1-1-exec = menu-open-0
+menu-1-0 = on
+menu-1-0-exec = dunstctl set-paused true
+menu-1-1 = off
+menu-1-1-exec = dunstctl set-paused false
 
-menu-2-0 = power off
-menu-2-0-exec = systemctl poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+menu-2-0 = reboot
+menu-2-0-exec = #cfg.open.3
+menu-2-1 = poweroff
+menu-2-1-exec = #cfg.open.4
+
+menu-3-0 = sure?
+menu-3-0-exec = systemctl reboot
+
+menu-4-0 = sure?
+menu-4-0-exec = systemctl poweroff
 
 [module/cpufreq]
 type = custom/script
