@@ -48,7 +48,7 @@ underline-color = ${colors.xcolor2}
 width = 100%
 height = 30
 ;offset-x = 1%
-;offset-y = 1%
+offset-y = 0.5%
 ; radius = 13.0
 fixed-center = false
 

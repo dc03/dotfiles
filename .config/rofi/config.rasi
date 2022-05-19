@@ -1,0 +1,8 @@
+//@theme "/usr/share/rofi/themes/Pop-Dark.rasi"
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+
+/* Dark theme. */
+@import "~/.cache/wal/colors-rofi-dark"
+
+/* Light theme. */
+/*@import "~/.cache/wal/colors-rofi-light"*/
