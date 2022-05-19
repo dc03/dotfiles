@@ -43,7 +43,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 . "$HOME/.cargo/env"
 
-setxkbmap -layout us,apl -variant ,dyalog -option grp:win_switch
+#setxkbmap -layout us,apl -variant ,dyalog -option grp:win_switch
 
-(xautolock -locker 'DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/4roxk1nqz4911.png' -time 5 -corners 00-- -detectsleep&)
+(xautolock -locker "/usr/bin/sh -c 'dunstctl set-paused true && DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/4roxk1nqz4911.png && dunstctl set-paused false'" -time 5 -corners 00-- -detectsleep&)
 (redshift-gtk -l $(curl ipinfo.io | jq '.loc' | sed 's/"//g' | sed 's/,/:/g') -m randr > /dev/null 2>&1 &)
