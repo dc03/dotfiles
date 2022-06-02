@@ -51,6 +51,7 @@ height = 30
 offset-y = 0.5%
 ; radius = 13.0
 fixed-center = false
+enable-ipc = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -75,7 +76,7 @@ font-4 = Termsynu:size=10;0
 
 modules-left = dwm
 modules-center =
-modules-right = pulseaudio memory cpu cpufreq wlan eth backlight battery date cfg
+modules-right = pulseaudio memory_placeholder memory cpu_placeholder cpu cpufreq wlan backlight battery date cfg
 ; xbacklight alsa temperature
 
 tray-position = right
@@ -94,19 +95,6 @@ override-redirect = false
 
 cursor-click = pointer
 cursor-scroll = ns-resize
-
-[module/toggle]
-type = custom/menu
-
-format-spacing = 1
-label-open = toggle
-label-close = close
-label-separator = |
-
-menu-0-0 = mem
-menu-0-0-exec = #memory.module_toggle
-menu-0-1 = cpu
-menu-0-1-exec = #cpu.module_toggle
 
 [module/xwindow]
 type = internal/xwindow
@@ -276,6 +264,16 @@ use-actual-brightness = true
 ; Default: false
 enable-scroll = true
 
+[module/cpu_placeholder]
+type = custom/text
+
+format = cpu
+format-foreground = ${colors.foreground}
+format-underline = ${colors.underline-color}
+hidden = false
+
+click-left = polybar-msg action "#cpu_placeholder.module_toggle" && polybar-msg action "#cpu.module_toggle"
+
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -285,6 +283,7 @@ format-background = ${colors.background}
 format-foreground = ${colors.foreground}
 format-underline = ${colors.underline-color}
 format-padding = 0
+hidden = true
 
 label = cpu (%percentage-sum:4%%)
 label-padding-right = 0
@@ -317,6 +316,15 @@ ramp-coreload-7 = █
 ramp-coreload-7-font = 5
 ramp-coreload-7-foreground = ${colors.alert}
 
+[module/memory_placeholder]
+type = custom/text
+format = mem
+
+format-foreground = ${colors.foreground}
+format-underline = ${colors.underline-color}
+click-left = polybar-msg action "#memory_placeholder.module_toggle" && polybar-msg action "#memory.module_toggle"
+hidden = false
+
 [module/memory]
 type = internal/memory
 
@@ -325,6 +333,9 @@ format-padding = 0
 format-background = ${colors.background}
 format-foreground = ${colors.foreground}
 format-underline = ${colors.underline-color}
+hidden = true
+
+click-right = 'polybar-msg action "#memory_placeholder.module_toggle" && polybar-msg action "#memory.module_toggle"'
 
 label = mem (%gb_used%/%gb_total%)
 label-padding-right = 0
