@@ -42,37 +42,51 @@ xcolor13 = ${xrdb:color13}
 xcolor14 = ${xrdb:color14}
 xcolor15 = ${xrdb:color15}
 underline-color = ${colors.xcolor2}
+;gradient1 = ${colors.xcolor6}
+gradient1 = ${colors.xcolor5}
+gradient2 = ${colors.xcolor4}
+gradient3 = ${colors.xcolor1}
+gradient4 = ${colors.xcolor2}
+gradient5 = ${colors.xcolor3}
+gradient6 = ${colors.xcolor5}
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 30
+height = 32
 ;offset-x = 1%
 offset-y = 0.5%
 ; radius = 13.0
 fixed-center = false
 enable-ipc = true
 
+;separator = |
+;separator-foreground = ${colors.secondary}
+
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-underline-size = 2
-underline-color = ${colors.background}
+;underline-size = 2
+;underline-color = ${colors.background}
 
 border-size = 10
 border-color = #00000000
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
-module-margin-left = 1
-module-margin-right = 1
+;module-margin-left = 2
+;module-margin-right = 2
 
-font-0 = JetBrains Mono:pixelsize=10;1
-font-1 = JoyPixels:pixelsize=10;1
-font-2 = siji:pixelsize=10;1
-font-3 = unifont:fontformat=truetype:size=10:antialias=false;0
-font-4 = Termsynu:size=10;0
+font-0 = JetBrains Mono:pixelsize=10;3
+font-1 = "feather:size=11;3"
+
+;font-2 = siji:pixelsize=10;1
+;font-3 = unifont:fontformat=truetype:size=10:antialias=false;0
+;font-4 = Termsynu:size=10;0
+;font-1 = JoyPixels:pixelsize=10;1
+;font-1 = "Iosevka Nerd Font:size=11;7"
+;font-2 = "Iosevka Nerd Font:size=11;7"
 
 modules-left = dwm
 modules-center =
@@ -80,7 +94,9 @@ modules-right = pulseaudio memory_placeholder memory cpu_placeholder cpu cpufreq
 ; xbacklight alsa temperature
 
 tray-position = right
-;tray-background = #0063ff
+tray-background = ${colors.gradient1}
+tray-foreground = ${colors.xcolor7}
+tray-padding = 2
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -183,8 +199,7 @@ label-floating = F
 
 ; focused = Selected tag on focused monitor
 label-focused = %name%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.foreground-alt}
+label-focused-background = ${colors.gradient1}
 label-focused-padding = 2
 
 ; unfocused = Unselected tag on unselected monitor
@@ -196,13 +211,12 @@ label-visible = %name%
 ;label-visible-background = ${self.label-focused-background}
 ;label-visible-underline = ${self.label-focused-underline}
 ;label-visible-padding = ${self.label-focused-padding}
-label-visible-background = ${colors.background-alt2}
-label-visible-underline = ${self.label-focused-underline}
+label-visible-background = ${colors.gradient2}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Unselected tag with window that has urgency hint set
 label-urgent = %name%
-label-urgent-background = ${colors.alert}
+label-urgent-background = ${colors.gradient5}
 label-urgent-padding = 2
 
 ; empty = Unselected and unoccupied tag
@@ -228,19 +242,27 @@ label-song-foreground = ${colors.foreground}
 [module/backlight]
 type = internal/backlight
 
-format = <label> <ramp>
+format = <ramp> <label>
+format-background = ${colors.gradient6}
+format-padding = 2
 
-label = bl %percentage%%
-format-underline = ${colors.underline-color}
+label = %percentage%%
 
-ramp-0 = ▁
-ramp-1 = ▂
-ramp-2 = ▃
-ramp-3 = ▄
-ramp-4 = ▅
-ramp-5 = ▆
-ramp-6 = ▇
-ramp-7 = █
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+;ramp-0 = ▁
+;ramp-1 = ▂
+;ramp-2 = ▃
+;ramp-3 = ▄
+;ramp-4 = ▅
+;ramp-5 = ▆
+;ramp-6 = ▇
+;ramp-7 = █
 
 ; Use the following command to list available cards:
 ; $ ls -1 /sys/class/backlight/
@@ -267,9 +289,11 @@ enable-scroll = true
 [module/cpu_placeholder]
 type = custom/text
 
-format = cpu
+format = 
 format-foreground = ${colors.foreground}
-format-underline = ${colors.underline-color}
+format-background = ${colors.gradient3}
+format-padding = 2
+
 hidden = false
 
 click-left = polybar-msg action "#cpu_placeholder.module_toggle" && polybar-msg action "#cpu.module_toggle"
@@ -279,13 +303,13 @@ type = internal/cpu
 interval = 2
 
 format = <label> <ramp-coreload>
-format-background = ${colors.background}
 format-foreground = ${colors.foreground}
-format-underline = ${colors.underline-color}
-format-padding = 0
+format-background = ${colors.gradient3}
+format-padding = 2
+
 hidden = true
 
-label = cpu (%percentage-sum:4%%)
+label =  %percentage%%
 label-padding-right = 0
 label-font = 10
 
@@ -318,10 +342,12 @@ ramp-coreload-7-foreground = ${colors.alert}
 
 [module/memory_placeholder]
 type = custom/text
-format = mem
+format = 
 
 format-foreground = ${colors.foreground}
-format-underline = ${colors.underline-color}
+format-background = ${colors.gradient2}
+format-padding = 2
+
 click-left = polybar-msg action "#memory_placeholder.module_toggle" && polybar-msg action "#memory.module_toggle"
 hidden = false
 
@@ -329,15 +355,15 @@ hidden = false
 type = internal/memory
 
 format = <label> <ramp-used>
-format-padding = 0
-format-background = ${colors.background}
+format-padding = 2
+format-background = ${colors.gradient2}
 format-foreground = ${colors.foreground}
-format-underline = ${colors.underline-color}
+
 hidden = true
 
 click-right = 'polybar-msg action "#memory_placeholder.module_toggle" && polybar-msg action "#memory.module_toggle"'
 
-label = mem (%gb_used%/%gb_total%)
+label =  %gb_used%/%gb_total%
 label-padding-right = 0
 label-font = 10
 
@@ -366,13 +392,14 @@ type = internal/network
 interface = wlp4s0
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = ${colors.underline-color}
+format-connected =   <label-connected>
+format-connected-background = ${colors.gradient5}
+format-connected-padding = 2
 label-connected = %essid%
 
 format-disconnected = <label-disconnected>
-format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %ifname% disconnected
+format-disconnected-padding = 2
+label-disconnected =  %ifname% disconnected
 label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = ▁
@@ -402,37 +429,47 @@ format-disconnected =
 type = internal/date
 interval = 1
 
-date = %A | %Y/%m/%d |
+date = %A | %Y/%m/%d | 
 ;date-alt = "%Y-%m-%d"
 
 time = %H:%M:%S
 ;time-alt = %H:%M
 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.underline-color}
+format-background = ${colors.gradient4}
+format-padding = 2
+
 
 label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <ramp-volume>
-label-volume = vol %percentage:3%%
-label-volume-foreground = ${root.foreground}
-format-volume-underline = ${colors.underline-color}
+format-volume = <ramp-volume> <label-volume>
+format-volume-background = ${colors.gradient1}
+format-volume-padding = 2
 
-ramp-volume-0 = ▁
-ramp-volume-1 = ▂
-ramp-volume-2 = ▃
-ramp-volume-3 = ▄
-ramp-volume-4 = ▅
-ramp-volume-5 = ▆
-ramp-volume-6 = ▇
-ramp-volume-7 = █
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+;ramp-volume-0 = ▁
+;ramp-volume-1 = ▂
+;ramp-volume-2 = ▃
+;ramp-volume-3 = ▄
+;ramp-volume-4 = ▅
+;ramp-volume-5 = ▆
+;ramp-volume-6 = ▇
+;ramp-volume-7 = █
 
 click-right = pavucontrol
 
-label-muted = muted
+label-muted =  muted
+label-muted-padding = 2
+label-muted-background = ${colors.xcolor7}
 label-muted-foreground = #666
 
 bar-volume-width = 10
@@ -485,15 +522,17 @@ battery = BAT0
 adapter = ADP0
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.underline-color}
+format-charging =  <label-charging>
+format-charging-background = ${colors.gradient5}
+format-charging-padding = 2
 
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-discharging =  <label-discharging>
+format-discharging-background = ${colors.gradient5}
+format-discharging-padding = 2
 
-format-full-prefix = "█"
+format-full-prefix = 
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-padding = 2
 
 ramp-capacity-0 = ▁
 ramp-capacity-1 = ▂
@@ -534,7 +573,7 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #f50a4d
+
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
@@ -548,17 +587,20 @@ ramp-foreground = ${colors.foreground-alt}
 type = custom/menu
 
 format-spacing = 1
-format-underline = ${colors.underline-color}
-label-open = menu
+format-background = ${colors.gradient3}
+format-padding = 2
+
+label-open = 
+label-open-font = 1
 label-open-foreground = ${colors.foreground}
-label-close = x
-label-close-foreground = ${colors.secondary}
+label-close = 
+label-close-foreground = ${colors.xcolor8}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = dnd
+menu-0-0 = 
 menu-0-0-exec = #cfg.open.1
-menu-0-1 = power
+menu-0-1 = 
 menu-0-1-exec = #cfg.open.2
 
 menu-1-0 = on
@@ -566,26 +608,28 @@ menu-1-0-exec = dunstctl set-paused true
 menu-1-1 = off
 menu-1-1-exec = dunstctl set-paused false
 
-menu-2-0 = reboot
+menu-2-0 = 
 menu-2-0-exec = #cfg.open.3
-menu-2-1 = poweroff
+menu-2-1 = 
 menu-2-1-exec = #cfg.open.4
+menu-2-2 = 
+menu-2-2-exec = xautolock -locknow
 
-menu-3-0 = sure?
+menu-3-0 = 
 menu-3-0-exec = systemctl reboot
 
-menu-4-0 = sure?
+menu-4-0 = 
 menu-4-0-exec = systemctl poweroff
 
 [module/cpufreq]
 type = custom/script
 
 format = <label>
-format-background = ${colors.background}
 format-foreground = ${colors.foreground}
-format-underline = ${colors.underline-color}
-format-padding = 0
+format-background = ${colors.gradient4}
+format-padding = 2
 
+click-left = gnome-system-monitor
 exec = '/home/dc/.local/bin/avg-cpu.sh'
 interval = 3
 
