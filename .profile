@@ -26,24 +26,29 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+function setup {
+    feh --bg-fill "/home/dc/Pictures/Wallpapers/d0lryapgyav81.jpg"
+    wal -i "/home/dc/Pictures/Wallpapers/d0lryapgyav81.jpg"
+    picom&
+    flameshot&
+    xset +fp /home/dc/.local/share/fonts
+    xset fp rehash
+    ~/.local/bin/temp-monitor.sh > /dev/null 2>&1 &
+    xbindkeys&
+    dunst&
+    export _JAVA_AWT_WM_NONREPARENTING=1
 
-feh --bg-fill "/home/dc/Pictures/Wallpapers/4roxk1nqz4911.png"
-wal -i "/home/dc/Pictures/Wallpapers/4roxk1nqz4911.png"
-picom&
-flameshot&
-xset +fp /home/dc/.local/share/fonts
-xset fp rehash
-~/.local/bin/temp-monitor.sh > /dev/null 2>&1 &
-xbindkeys&
-dunst&
+    (xautolock -locker "/usr/bin/sh -c 'dunstctl set-paused true && DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/d0lryapgyav81.jpg && dunstctl set-paused false'" -time 5 -corners 00-- -detectsleep&)
+    (redshift-gtk -l $(curl ipinfo.io | jq '.loc' | sed 's/"//g' | sed 's/,/:/g') -m randr > /dev/null 2>&1 &)
+}
+
 TOUCHPAD_ID=$(xinput list | grep Touchpad | awk '{print $6}' | tr '=' ' ' | awk '{print $2}')
 xinput set-prop ${TOUCHPAD_ID}  "libinput Natural Scrolling Enabled" 1
 xinput set-prop ${TOUCHPAD_ID} "libinput Tapping Enabled" 1
-export _JAVA_AWT_WM_NONREPARENTING=1
 
 . "$HOME/.cargo/env"
 
 #setxkbmap -layout us,apl -variant ,dyalog -option grp:win_switch
 
-(xautolock -locker "/usr/bin/sh -c 'dunstctl set-paused true && DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/4roxk1nqz4911.png && dunstctl set-paused false'" -time 5 -corners 00-- -detectsleep&)
-(redshift-gtk -l $(curl ipinfo.io | jq '.loc' | sed 's/"//g' | sed 's/,/:/g') -m randr > /dev/null 2>&1 &)
+setup
+export SDL_JOYSTICK_HIDAPI=0

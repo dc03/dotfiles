@@ -42,7 +42,6 @@ xcolor13 = ${xrdb:color13}
 xcolor14 = ${xrdb:color14}
 xcolor15 = ${xrdb:color15}
 underline-color = ${colors.xcolor2}
-;gradient1 = ${colors.xcolor6}
 gradient1 = ${colors.xcolor5}
 gradient2 = ${colors.xcolor4}
 gradient3 = ${colors.xcolor1}
@@ -60,14 +59,8 @@ offset-y = 0.5%
 fixed-center = false
 enable-ipc = true
 
-;separator = |
-;separator-foreground = ${colors.secondary}
-
 background = ${colors.background}
 foreground = ${colors.foreground}
-
-;underline-size = 2
-;underline-color = ${colors.background}
 
 border-size = 10
 border-color = #00000000
@@ -75,73 +68,27 @@ border-color = #00000000
 padding-left = 0
 padding-right = 0
 
-;module-margin-left = 2
-;module-margin-right = 2
-
 font-0 = JetBrains Mono:pixelsize=10;3
 font-1 = "feather:size=11;3"
 
-;font-2 = siji:pixelsize=10;1
-;font-3 = unifont:fontformat=truetype:size=10:antialias=false;0
-;font-4 = Termsynu:size=10;0
-;font-1 = JoyPixels:pixelsize=10;1
-;font-1 = "Iosevka Nerd Font:size=11;7"
-;font-2 = "Iosevka Nerd Font:size=11;7"
-
-modules-left = dwm
+modules-left = dwm xwindow
 modules-center =
-modules-right = pulseaudio memory_placeholder memory cpu_placeholder cpu cpufreq wlan backlight battery date cfg
-; xbacklight alsa temperature
+modules-right = pulseaudio memory_icon memory cpu_icon cpu cpufreq wlan backlight battery date cfg
 
 tray-position = right
 tray-background = ${colors.gradient1}
 tray-foreground = ${colors.xcolor7}
 tray-padding = 2
 
-;wm-restack = bspwm
-;wm-restack = i3
-
 override-redirect = false
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-;format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#a78a73}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-;label-mounted-underline = ${colors.underline-color}
-label-unmounted-foreground = ${colors.foreground-alt}
+label = %title:0:25:...%
+format-padding = 1
 
 [module/dwm]
 type = internal/dwm
@@ -208,9 +155,6 @@ label-unfocused-padding = 2
 
 ; visible = Unselected tag, but occupied tag on any monitor
 label-visible = %name%
-;label-visible-background = ${self.label-focused-background}
-;label-visible-underline = ${self.label-focused-underline}
-;label-visible-padding = ${self.label-focused-padding}
 label-visible-background = ${colors.gradient2}
 label-visible-padding = ${self.label-focused-padding}
 
@@ -286,7 +230,42 @@ use-actual-brightness = true
 ; Default: false
 enable-scroll = true
 
-[module/cpu_placeholder]
+[module/memory_icon]
+type = custom/text
+format = 
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.gradient2}
+format-padding = 2
+
+click-left = polybar-msg action "#memory.module_toggle"
+hidden = false
+
+[module/memory]
+type = internal/memory
+
+format = "<label> <ramp-used>  "
+format-padding = 0
+format-background = ${colors.gradient2}
+format-foreground = ${colors.foreground}
+
+hidden = true
+
+label = %gb_used%/%gb_total%
+label-padding-right = 0
+label-font = 10
+
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+
+[module/cpu_icon]
 type = custom/text
 
 format = 
@@ -296,20 +275,20 @@ format-padding = 2
 
 hidden = false
 
-click-left = polybar-msg action "#cpu_placeholder.module_toggle" && polybar-msg action "#cpu.module_toggle"
+click-left = polybar-msg action "#cpu.module_toggle"
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 
-format = <label> <ramp-coreload>
+format = "<label> <ramp-coreload>  "
 format-foreground = ${colors.foreground}
 format-background = ${colors.gradient3}
-format-padding = 2
+format-padding = 0
 
 hidden = true
 
-label =  %percentage%%
+label = %percentage%%
 label-padding-right = 0
 label-font = 10
 
@@ -340,52 +319,17 @@ ramp-coreload-7 = █
 ramp-coreload-7-font = 5
 ramp-coreload-7-foreground = ${colors.alert}
 
-[module/memory_placeholder]
-type = custom/text
-format = 
+[module/cpufreq]
+type = custom/script
 
+format = <label>
 format-foreground = ${colors.foreground}
-format-background = ${colors.gradient2}
+format-background = ${colors.gradient4}
 format-padding = 2
 
-click-left = polybar-msg action "#memory_placeholder.module_toggle" && polybar-msg action "#memory.module_toggle"
-hidden = false
-
-[module/memory]
-type = internal/memory
-
-format = <label> <ramp-used>
-format-padding = 2
-format-background = ${colors.gradient2}
-format-foreground = ${colors.foreground}
-
-hidden = true
-
-click-right = 'polybar-msg action "#memory_placeholder.module_toggle" && polybar-msg action "#memory.module_toggle"'
-
-label =  %gb_used%/%gb_total%
-label-padding-right = 0
-label-font = 10
-
-ramp-used-0 = ▁
-ramp-used-1 = ▂
-ramp-used-2 = ▃
-ramp-used-3 = ▄
-ramp-used-4 = ▅
-ramp-used-5 = ▆
-ramp-used-6 = ▇
-ramp-used-7 = █
-
-; bar-used-width = 10
-; bar-used-indicator = |
-; bar-used-indicator-font = 4
-; bar-used-indicator-foreground = ${colors.xcolor7}
-; bar-used-fill = ─
-; bar-used-fill-font = 4
-; bar-used-fill-foreground = ${colors.xcolor6}
-; bar-used-empty = ─
-; bar-used-empty-font = 4
-; bar-used-empty-foreground = ${colors.xcolor3}
+click-left = gnome-system-monitor
+exec = '/home/dc/.local/bin/avg-cpu.sh'
+interval = 3
 
 [module/wlan]
 type = internal/network
@@ -408,22 +352,6 @@ ramp-signal-2 = ▁▂▃
 ramp-signal-3 = ▁▂▃▄
 ramp-signal-4 = ▁▂▃▄▅ 
 ramp-signal-foreground = ${colors.xcolor3}
-
-[module/eth]
-type = internal/network
-interface = virbr1
-interval = 3.0
-
-format-connected-underline = #55aa55
-;format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
@@ -489,33 +417,6 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
-[module/alsa]
-type = internal/alsa
-
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
-
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
 [module/battery]
 type = internal/battery
 battery = BAT0
@@ -534,54 +435,38 @@ format-full-prefix = 
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-padding = 2
 
-ramp-capacity-0 = ▁
-ramp-capacity-1 = ▂
-ramp-capacity-2 = ▃
-ramp-capacity-3 = ▄
-ramp-capacity-4 = ▅
-ramp-capacity-5 = ▆
-ramp-capacity-6 = ▇
-ramp-capacity-7 = █
-ramp-capacity-foreground = ${colors.foreground-alt}
+; ramp-capacity-0 = ▁
+; ramp-capacity-1 = ▂
+; ramp-capacity-2 = ▃
+; ramp-capacity-3 = ▄
+; ramp-capacity-4 = ▅
+; ramp-capacity-5 = ▆
+; ramp-capacity-6 = ▇
+; ramp-capacity-7 = █
+; ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = ▁
-animation-charging-1 = ▂
-animation-charging-2 = ▃
-animation-charging-3 = ▄
-animation-charging-4 = ▅
-animation-charging-5 = ▆
-animation-charging-6 = ▇
-animation-charging-7 = █
-animation-charging-foreground = ${colors.xcolor3}
-animation-charging-framerate = 750
+; animation-charging-0 = ▁
+; animation-charging-1 = ▂
+; animation-charging-2 = ▃
+; animation-charging-3 = ▄
+; animation-charging-4 = ▅
+; animation-charging-5 = ▆
+; animation-charging-6 = ▇
+; animation-charging-7 = █
+; animation-charging-foreground = ${colors.xcolor3}
+; animation-charging-framerate = 750
 
-animation-discharging-0 = █
-animation-discharging-1 = ▇
-animation-discharging-2 = ▆
-animation-discharging-3 = ▅
-animation-discharging-4 = ▄
-animation-discharging-5 = ▃
-animation-discharging-6 = ▂
-animation-discharging-7 = ▁
+; animation-discharging-0 = █
+; animation-discharging-1 = ▇
+; animation-discharging-2 = ▆
+; animation-discharging-3 = ▅
+; animation-discharging-4 = ▄
+; animation-discharging-5 = ▃
+; animation-discharging-6 = ▂
+; animation-discharging-7 = ▁
 
-animation-discharging-foreground = ${colors.xcolor4}
-animation-discharging-framerate = 750
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
-
-ramp-foreground = ${colors.foreground-alt}
+; animation-discharging-foreground = ${colors.xcolor4}
+; animation-discharging-framerate = 750
 
 [module/cfg]
 type = custom/menu
@@ -620,18 +505,6 @@ menu-3-0-exec = systemctl reboot
 
 menu-4-0 = 
 menu-4-0-exec = systemctl poweroff
-
-[module/cpufreq]
-type = custom/script
-
-format = <label>
-format-foreground = ${colors.foreground}
-format-background = ${colors.gradient4}
-format-padding = 2
-
-click-left = gnome-system-monitor
-exec = '/home/dc/.local/bin/avg-cpu.sh'
-interval = 3
 
 [settings]
 screenchange-reload = true
