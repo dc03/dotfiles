@@ -1,8 +1,5 @@
 # dotfiles
 
-My dotfiles:
-- .vimrc
-- .tmux.conf
-- .zshrc
-- .bar.sh (to start polybar from dwm)
-- .config/polybar/config (polybar config)
+My dotfiles along with setup scripts
+
+![A screenshot of my desktop](./assets/screenie.png)
