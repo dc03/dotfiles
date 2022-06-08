@@ -15,24 +15,26 @@ ln -s $(pwd)/.xbindkeysrc $HOME/.tmux.conf
 
 echo "mkdir -p $HOME/.local/bin/"
 mkdir -p $HOME/.local/bin/
-
 echo "cp $(pwd)/.local/bin/* $HOME/.local/bin/"
 cp $(pwd)/.local/bin/* $HOME/.local/bin/
 
 echo "mkdir -p $HOME/.config/wal/templates/"
 mkdir -p $HOME/.config/wal/templates/
-
 echo "cp $(pwd)/.config/wal/templates/* $HOME/.config/wal/templates/"
 cp $(pwd)/.config/wal/templates/* $HOME/.config/wal/templates/
 
 echo "mkdir -p $HOME/.config/rofi/"
 mkdir -p $HOME/.config/rofi/
-
 echo "cp $(pwd)/.config/rofi/* $HOME/.config/rofi/"
 cp $(pwd)/.config/rofi/* $HOME/.config/rofi/
 
 echo "mkdir -p $HOME/.config/polybar/"
 mkdir -p $HOME/.config/polybar/
-
 echo "cp $(pwd)/.config/polybar/* $HOME/.config/polybar/"
 cp $(pwd)/.config/polybar/* $HOME/.config/polybar/
+
+echo "mkdir -p $HOME/Pictures/Wallpapers"
+mkdir -p $HOME/Pictures/Wallpapers/
+echo "cp $(pwd)/Pictures/Wallpapers/* $HOME/Pictures/Wallpapers/"
+cp $(pwd)/Pictures/Wallpapers/* $HOME/Pictures/Wallpapers/
+

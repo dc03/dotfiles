@@ -12,3 +12,5 @@ git clone https://github.com/Raymo111/i3lock-color
 git clone https://github.com/jschx/ufetch
 git clone https://git.suckless.org/dmenu
 git clone https://github.com/lukesmithxyz/st
+git clone https://github.com/dc03/dwm
+
