@@ -27,11 +27,11 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 function setup {
-    feh --bg-fill "/home/dc/Pictures/Wallpapers/d0lryapgyav81.jpg"
-    wal -i "/home/dc/Pictures/Wallpapers/d0lryapgyav81.jpg"
+    feh --bg-fill "$HOME/Pictures/Wallpapers/d0lryapgyav81.jpg"
+    wal -i "$HOME/Pictures/Wallpapers/d0lryapgyav81.jpg"
     picom&
     flameshot&
-    xset +fp /home/dc/.local/share/fonts
+    xset +fp $HOME/.local/share/fonts
     xset fp rehash
     ~/.local/bin/temp-monitor.sh > /dev/null 2>&1 &
     xbindkeys&

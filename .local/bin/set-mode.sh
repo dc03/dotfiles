@@ -3,25 +3,25 @@
 function ask_mode {
     sudo sudo > /dev/null 2>&1
     printf "[INFO] Mode: "
-    sudo /home/dc/GIT/battmngr/battmngr -r
+    sudo $HOME/GIT/battmngr/battmngr -r
     echo "[INFO] Please use Fn + Q to set mode and press enter when done"
     read _unused
-    sudo /home/dc/GIT/battmngr/battmngr -r
+    sudo $HOME/GIT/battmngr/battmngr -r
 }
 
 function ryzenadj_low {
     echo "[INFO] Executing ryzenadj to low preset [--slow-time=60 --tctl-temp=60 --stapm-limit=10000 --stapm-time=600 --fast-limit=15000 --slow-limit=7000]"
-    sudo /home/dc/GIT/RyzenAdj/build/ryzenadj --slow-time=60 --tctl-temp=60 --stapm-limit=10000 --stapm-time=600 --fast-limit=15000 --slow-limit=7000
+    sudo $HOME/GIT/RyzenAdj/build/ryzenadj --slow-time=60 --tctl-temp=60 --stapm-limit=10000 --stapm-time=600 --fast-limit=15000 --slow-limit=7000
 }
 
 function ryzenadj_med {
     echo "[INFO] Executing ryzenadj to medium preset [--slow-time=60 --tctl-temp=80 --stapm-limit=15000 --stapm-time=900 --fast-limit=25000 --slow-limit=20000]"
-    sudo /home/dc/GIT/RyzenAdj/build/ryzenadj --slow-time=60 --tctl-temp=80 --stapm-limit=15000 --stapm-time=900 --fast-limit=25000 --slow-limit=20000
+    sudo $HOME/GIT/RyzenAdj/build/ryzenadj --slow-time=60 --tctl-temp=80 --stapm-limit=15000 --stapm-time=900 --fast-limit=25000 --slow-limit=20000
 }
 
 function ryzenadj_high {
     echo "[INFO] Executing ryzenadj to high preset [--slow-time=60 --tctl-temp=80 --stapm-limit=45000 --stapm-time=900 --fast-limit=55000 --slow-limit=40000]"
-    sudo /home/dc/GIT/RyzenAdj/build/ryzenadj --slow-time=60 --tctl-temp=80 --stapm-limit=45000 --stapm-time=900 --fast-limit=55000 --slow-limit=40000
+    sudo $HOME/GIT/RyzenAdj/build/ryzenadj --slow-time=60 --tctl-temp=80 --stapm-limit=45000 --stapm-time=900 --fast-limit=55000 --slow-limit=40000
 }
 
 function set_low {
@@ -62,15 +62,15 @@ case $1 in
     "cpu")
         case $2 in
             "low")
-                sudo /home/dc/.local/bin/cpumgr.sh 8 offline
+                sudo $HOME/.local/bin/cpumgr.sh 8 offline
                 set_low
                 ;;
             "med")
-                sudo /home/dc/.local/bin/cpumgr.sh 8 online
+                sudo $HOME/.local/bin/cpumgr.sh 8 online
                 set_med
                 ;;
             "high")
-                sudo /home/dc/.local/bin/cpumgr.sh 8 online
+                sudo $HOME/.local/bin/cpumgr.sh 8 online
                 set_high
                 ;;
             "low_16")
@@ -91,11 +91,11 @@ case $1 in
         case $2 in
             "conserve_on")
                 sudo sh -c 'echo 1 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode'
-                sudo /home/dc/GIT/battmngr/battmngr -rc
+                sudo $HOME/GIT/battmngr/battmngr -rc
                 ;;
             "conserve_off")
                 sudo sh -c 'echo 0 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode'
-                sudo /home/dc/GIT/battmngr/battmngr -rc
+                sudo $HOME/GIT/battmngr/battmngr -rc
                 ;;
             *)
                 print_usage

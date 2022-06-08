@@ -327,7 +327,7 @@ format-background = ${colors.gradient4}
 format-padding = 2
 
 click-left = gnome-system-monitor
-exec = '/home/dc/.local/bin/avg-cpu.sh'
+exec = '$HOME/.local/bin/avg-cpu.sh'
 interval = 3
 
 [module/wlan]

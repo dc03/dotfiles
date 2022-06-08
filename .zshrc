@@ -11,7 +11,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/dc/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -93,7 +93,7 @@ alias othp=htop
 alias ohtp=htop
 alias ohpt=htop
 # -- START ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
-export PATH="/home/dc/.cache/activestate/bin:$PATH"
+export PATH="$HOME/.cache/activestate/bin:$PATH"
 # -- STOP ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
 alias minecraft='java -jar /mnt/gorbage/TLauncher-2.82/TLauncher-2.82.jar'
 alias vim='vim -T xterm_256color'
@@ -114,7 +114,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 alias java17=/usr/lib/jvm/java-17-openjdk-amd64/bin/java
 alias mc='use-nvidia "java -jar /mnt/gorbage/TLauncher-2.82/TLauncher-2.82.jar"'
 
-export CLASSPATH=/home/dc/Downloads/Executable/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar:$CLASSPATH
+export CLASSPATH=$HOME/Downloads/Executable/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar:$CLASSPATH
 
 alias cat=batcat
-alias lock='DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/4roxk1nqz4911.png'
+alias lock='DISPLAY=:1 /usr/local/bin/betterlockscreen --lock $HOME/Pictures/Wallpapers/4roxk1nqz4911.png'

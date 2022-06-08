@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-polybar --reload --config=/home/dc/.config/polybar/config example&
+polybar --reload --config=$HOME/.config/polybar/config example&
