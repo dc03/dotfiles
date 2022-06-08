@@ -35,10 +35,11 @@ function setup {
     xset fp rehash
     ~/.local/bin/temp-monitor.sh > /dev/null 2>&1 &
     xbindkeys&
+    cp ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
     dunst&
     export _JAVA_AWT_WM_NONREPARENTING=1
 
-    (xautolock -locker "/usr/bin/sh -c 'dunstctl set-paused true && DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/d0lryapgyav81.jpg && dunstctl set-paused false'" -time 5 -corners 00-- -detectsleep&)
+    (xautolock -locker "/usr/bin/sh -c 'dunstctl set-paused true && DISPLAY=:1 /usr/local/bin/betterlockscreen --lock blur -- -n && dunstctl set-paused false'" -time 5 -killtime 10 -killer "systemctl suspend" -corners 00-- -detectsleep&)
     (redshift-gtk -l $(curl ipinfo.io | jq '.loc' | sed 's/"//g' | sed 's/,/:/g') -m randr > /dev/null 2>&1 &)
 }
 

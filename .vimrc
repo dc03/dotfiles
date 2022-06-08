@@ -172,6 +172,7 @@ Plug 'google/vim-codefmt', {'for': ['cpp', 'c']}
 Plug 'google/vim-maktaba', {'for': ['cpp', 'c']}
 Plug 'google/vim-glaive', {'for': ['cpp', 'c']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
+Plug 'ap/vim-css-color'
 Plug 'tpope/vim-fugitive'
 Plug 'shirk/vim-gas', {'for': ['s', 'asm']}
 Plug 'airblade/vim-gitgutter'
