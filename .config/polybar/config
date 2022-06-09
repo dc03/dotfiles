@@ -70,10 +70,11 @@ padding-right = 0
 
 font-0 = JetBrains Mono:pixelsize=10;3
 font-1 = "feather:size=11;3"
+font-2 = "Noto Emoji Medium:style=Regular;3"
 
 modules-left = dwm xwindow
 modules-center =
-modules-right = pulseaudio memory_icon memory cpu_icon cpu cpufreq wlan backlight battery date cfg
+modules-right = pulseaudio memory_icon memory cpu_icon cpu cpufreq weather_icon weather wlan backlight battery date cfg
 
 tray-position = right
 tray-background = ${colors.gradient1}
@@ -321,14 +322,42 @@ ramp-coreload-7-foreground = ${colors.alert}
 [module/cpufreq]
 type = custom/script
 
+format = "<label>  "
+format-foreground = ${colors.foreground}
+format-background = ${colors.gradient3}
+format-padding = 0
+
+click-left = gnome-system-monitor
+click-right = gnome-system-monitor
+exec = '/home/dc/.local/bin/avg-cpu.sh'
+interval = 3
+
+[module/weather_icon]
+type = custom/script
+
 format = <label>
 format-foreground = ${colors.foreground}
 format-background = ${colors.gradient4}
 format-padding = 2
 
-click-left = gnome-system-monitor
-exec = '$HOME/.local/bin/avg-cpu.sh'
-interval = 3
+exec = '/home/dc/.local/bin/get-weather-icon.sh'
+click-left = polybar-msg action "#weather.module_toggle"
+
+interval = 60
+
+[module/weather]
+type = custom/script
+
+hidden = true
+
+format = "<label>  "
+format-foreground = ${colors.foreground}
+format-background = ${colors.gradient4}
+format-padding = 0
+
+exec = '/home/dc/.local/bin/get-weather.sh'
+
+interval = 300
 
 [module/wlan]
 type = internal/network
@@ -356,11 +385,11 @@ ramp-signal-foreground = ${colors.xcolor3}
 type = internal/date
 interval = 1
 
-date = %A | %Y/%m/%d | 
-;date-alt = "%Y-%m-%d"
+date = %A | 
+date-alt = %A | %Y/%m/%d | 
 
 time = %H:%M:%S
-;time-alt = %H:%M
+time-alt = %H:%M:%S
 
 format-prefix-foreground = ${colors.foreground-alt}
 format-background = ${colors.gradient4}
