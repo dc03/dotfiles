@@ -50,6 +50,11 @@ set noshowmode
 setlocal conceallevel=2
 set concealcursor=nciv
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" autocomplete settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set completeopt=menuone,noinsert,noselect,preview
+
 source ~/.vim/autoload/vim-plug/plug.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
