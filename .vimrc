@@ -16,7 +16,7 @@ set encoding=UTF-8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
 set shiftwidth=4
-set tabstop=4
+set tabstop=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the numbering
@@ -54,16 +54,15 @@ set concealcursor=nciv
 " autocomplete settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set completeopt=menuone,noinsert,noselect,preview
-
-source ~/.vim/autoload/vim-plug/plug.vim
+set pumheight=5
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keybindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <C-A> :TagbarToggle   <CR>
 nnoremap <silent> <CR>  :nohlsearch     <CR><CR>
-nnoremap <silent> <C-]> :Vexplore       <CR>
-nnoremap <silent> <C-\> :Vexplore!      <CR>
+nnoremap <silent> <leader>f :NERDTreeToggle <CR>
+nnoremap <silent> <C-]> :Lexplore!      <CR>
 
 nnoremap <silent> ge :LspDocumentDiagnostics <CR>
 nnoremap <silent> gd :LspDefinition          <CR>
@@ -72,6 +71,9 @@ nnoremap <silent> gk :LspHover               <CR>
 nnoremap <f2> :LspRename                     <CR>
 nnoremap <silent> ga :LspWorkspaceSymbol     <CR>
 nnoremap <silent> gl :LspDocumentSymbol      <CR>
+nnoremap <silent> gx :SemanticHighlight      <CR>
+"nnoremap <silent> gx :LspCxxHighlight      <CR>
+nnoremap <silent> gf :FormatCode             <CR>
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -81,17 +83,20 @@ imap jj <ESC>
 imap jjw <ESC>:wa<RETURN>
 imap jjwq <ESC>:wqa<RETURN>
 
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set the <leader> key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = "["
+let mapleader = "\\"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " netrw options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:netrw_preview = 1
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 0
-let g:netrw_winsize = 50
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 15
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-cpp-enhanced-highlight options
@@ -195,6 +200,7 @@ endif
 " allow modifying the completeopt variable, or it will
 " be overridden all the time
 let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_min_chars = 1
 
 "let g:deoplete#enable_at_startup = 1
 " ale options
@@ -239,10 +245,31 @@ let g:vimtex_compiler_latexmk = {
       \}
 
 "let g:everforest_background = 'soft'
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_semantic_enabled = 1
 
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+    " refer to doc to add more commands
+endfunction
+
+let g:tagbar_width = max([20, winwidth(0) / 6])
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+source ~/.vim/autoload/plug.vim
+
 call plug#begin('~/.vim/plugged')
 
 "Plug 'ervandew/supertab'
@@ -254,15 +281,19 @@ Plug 'junegunn/fzf.vim'
 Plug 'jpalardy/vim-slime'
 Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
+Plug 'ActivityWatch/aw-watcher-vim'
 
 " vim layout
+Plug 'preservim/nerdtree'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 
 " Clang-format
-Plug 'google/vim-codefmt', {'for': ['cpp', 'c']}
-Plug 'google/vim-maktaba', {'for': ['cpp', 'c']}
-Plug 'google/vim-glaive', {'for': ['cpp', 'c']}
+Plug 'google/vim-codefmt'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-glaive'
 
 " Editing help
 Plug 'jiangmiao/auto-pairs'
@@ -287,6 +318,8 @@ Plug 'ap/vim-css-color'
 Plug 'lifepillar/vim-solarized8'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
 Plug 'shirk/vim-gas', {'for': ['s', 'asm']}
+Plug 'habamax/vim-rst'
+Plug 'jaxbot/semantic-highlight.vim'
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -324,4 +357,50 @@ colorscheme one
 " autocmd vimenter * bd temp
 autocmd vimenter * RainbowParentheses
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd vimenter * filetype detect
+autocmd vimenter *.ll set filetype=llvm
+autocmd vimenter CMakeLists.txt syntax enable
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LLVM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LLVM Makefiles can have names such as Makefile.rules or TEST.nightly.Makefile,
+" so it's important to categorize them as such.
+augroup filetype
+  au! BufRead,BufNewFile *Makefile* set filetype=make
+augroup END
+
+" In Makefiles, don't expand tabs to spaces, since we need the actual tabs
+autocmd FileType make set noexpandtab
+
+" Useful macros for cleaning up code to conform to LLVM coding guidelines
+
+" Delete trailing whitespace and tabs at the end of each line
+command! DeleteTrailingWs :%s/\s\+$//
+
+" Convert all tab characters to two spaces
+command! Untab :%s/\t/  /g
+
+" Enable syntax highlighting for LLVM files. To use, copy
+" utils/vim/syntax/llvm.vim to ~/.vim/syntax .
+augroup filetype
+  au! BufRead,BufNewFile *.ll     set filetype=llvm
+augroup END
+
+" Enable syntax highlighting for tablegen files. To use, copy
+" utils/vim/syntax/tablegen.vim to ~/.vim/syntax .
+augroup filetype
+  au! BufRead,BufNewFile *.td     set filetype=tablegen
+augroup END
+
+" Enable syntax highlighting for reStructuredText files. To use, copy
+" rest.vim (http://www.vim.org/scripts/script.php?script_id=973)
+" to ~/.vim/syntax .
+augroup filetype
+ au! BufRead,BufNewFile *.rst     set filetype=rest
+augroup END
+
 
