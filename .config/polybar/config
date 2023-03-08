@@ -20,7 +20,7 @@
 background = ${xrdb:color0:#282828}
 background-alt = ${xrdb:color4:#32302f}
 background-alt2 = ${xrdb:color1:#32302f}
-foreground = ${xrdb:color7:#ebdbb2}
+foreground = ${xrdb:color0:xrdb:color7:#ebdbb2}
 foreground-alt = ${xrdb:color7:#ebdbb2}
 primary = ${xrdb:color0:#cc241d}
 secondary = ${xrdb:color5:#fe8019}
@@ -50,7 +50,7 @@ gradient5 = ${colors.xcolor3}
 gradient6 = ${colors.xcolor5}
 
 [bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:}
 width = 100%
 height = 32
 ;offset-x = 1%
@@ -74,7 +74,8 @@ font-2 = "Noto Emoji Medium:style=Regular;3"
 
 modules-left = dwm xwindow
 modules-center =
-modules-right = pulseaudio memory_icon memory cpu_icon cpu cpufreq weather_icon weather wlan backlight battery date cfg
+modules-right = pulseaudio memory_icon memory cpu_icon cpu cpufreq wlan backlight battery date cfg
+;weather_icon weather
 
 tray-position = right
 tray-background = ${colors.gradient1}
@@ -89,6 +90,7 @@ cursor-scroll = ns-resize
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:25:...%
+label-foreground = ${colors.background-alt}
 format-padding = 1
 
 [module/dwm]
@@ -148,6 +150,7 @@ label-floating = F
 ; focused = Selected tag on focused monitor
 label-focused = %name%
 label-focused-background = ${colors.gradient1}
+label-focused-foreground = ${colors.xcolor0}
 label-focused-padding = 2
 
 ; unfocused = Unselected tag on unselected monitor
@@ -157,6 +160,7 @@ label-unfocused-padding = 2
 ; visible = Unselected tag, but occupied tag on any monitor
 label-visible = %name%
 label-visible-background = ${colors.gradient2}
+label-visible-foreground = ${colors.xcolor1}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Unselected tag with window that has urgency hint set
@@ -168,6 +172,7 @@ label-urgent-padding = 2
 ; This can be set to an empty string to hide empty tags
 label-empty = %name%
 label-empty-background = ${colors.primary}
+label-empty-foreground = ${colors.xcolor5}
 label-empty-padding = 2
 
 [module/mpd]
@@ -364,14 +369,14 @@ type = internal/network
 interface = wlp4s0
 interval = 3.0
 
-format-connected =   <label-connected>
+format-connected = " <label-connected>"
 format-connected-background = ${colors.gradient5}
 format-connected-padding = 2
-label-connected = %essid%
+label-connected = %essid:0:7:...%
 
 format-disconnected = <label-disconnected>
 format-disconnected-padding = 2
-label-disconnected =  %ifname% disconnected
+label-disconnected =  
 label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = ▁
@@ -515,6 +520,8 @@ menu-0-0 = 
 menu-0-0-exec = #cfg.open.1
 menu-0-1 = 
 menu-0-1-exec = #cfg.open.2
+menu-0-2 = ☕
+menu-0-2-exec = #cfg.open.5
 
 menu-1-0 = on
 menu-1-0-exec = dunstctl set-paused true
@@ -533,6 +540,11 @@ menu-3-0-exec = systemctl reboot
 
 menu-4-0 = 
 menu-4-0-exec = systemctl poweroff
+
+menu-5-0 = on
+menu-5-0-exec = xset s off
+menu-5-1 = off
+menu-5-1-exec = xset s on
 
 [settings]
 screenchange-reload = true

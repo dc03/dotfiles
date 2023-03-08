@@ -11,7 +11,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '$HOME/.zshrc'
+zstyle :compinstall filename '/home/dc/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -22,7 +22,7 @@ autoload -Uz vcs_info
 precmd() { vcs_info }
 
 EDITOR='vim'
-PATH=$PATH:~/.cargo/bin:~/.local/bin:~/.local/share/gem/ruby/2.7.0/bin:~/go/bin/
+PATH=/opt/mold/bin:$PATH:~/.cargo/bin:~/.local/bin:~/.local/share/gem/ruby/2.7.0/bin:~/go/bin/
 
 setopt promptsubst
 
@@ -93,10 +93,11 @@ alias othp=htop
 alias ohtp=htop
 alias ohpt=htop
 # -- START ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
-export PATH="$HOME/.cache/activestate/bin:$PATH"
+export PATH="/home/dc/.cache/activestate/bin:$PATH"
 # -- STOP ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
 alias minecraft='java -jar /mnt/gorbage/TLauncher-2.82/TLauncher-2.82.jar'
 alias vim='vim -T xterm_256color'
+alias vimdiff='vimdiff -T xterm_256color'
 alias ufetch='~/GIT/ufetch/ufetch-debian'
 
 function isfile() {
@@ -112,9 +113,62 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 alias java17=/usr/lib/jvm/java-17-openjdk-amd64/bin/java
-alias mc='use-nvidia "java -jar /mnt/gorbage/TLauncher-2.82/TLauncher-2.82.jar"'
 
-export CLASSPATH=$HOME/Downloads/Executable/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar:$CLASSPATH
+export CLASSPATH=/usr/share/java/jna.jar:/home/dc/Downloads/Executable/mysql-connector-java-8.0.27/mysql-connector-java-8.0.27.jar:$CLASSPATH
 
 alias cat=batcat
-alias lock='DISPLAY=:1 /usr/local/bin/betterlockscreen --lock $HOME/Pictures/Wallpapers/4roxk1nqz4911.png'
+alias lock='DISPLAY=:1 /usr/local/bin/betterlockscreen --lock /home/dc/Pictures/Wallpapers/4roxk1nqz4911.png'
+alias venv='python3 -m virtualenv venv && source ./venv/bin/activate'
+alias ip='ip -color=auto'
+alias perfreport='perf report --call-graph=graph,caller'
+
+function llvm-16() {
+    cd /mnt/entschuldigung/LLVM/llvm-main
+    source llvm-venv/bin/activate
+}
+
+function llvm-test-16() {
+    cd /mnt/entschuldigung/LLVM
+    source llvm-main/llvm-venv/bin/activate
+    cd llvm-test-suite
+}
+
+function l16() {
+    BUILDTYPE=$1
+    /mnt/entschuldigung/LLVM/llvm-main/${BUILDTYPE}/bin/${@:2}
+}
+
+function l16p() {
+    BUILDTYPE=$1
+    echo "/mnt/entschuldigung/LLVM/llvm-main/${BUILDTYPE}/bin/${@:2}"
+}
+
+function kalei() {
+    llvm-16
+    cd ../kaleidoscope
+}
+
+function enable-cpu-boost() {
+    echo "1" | sudo tee /sys/devices/system/cpu/cpufreq/boost
+}
+
+function disable-cpu-boost() {
+    echo "0" | sudo tee /sys/devices/system/cpu/cpufreq/boost
+}
+
+function dot-all() {
+    for i in $(find . -name *.dot); do
+        dot ${i} -Tpng -o${i}.png
+    done
+}
+
+function flameit() {
+    perf script -i $1 > $1.perf
+    ~/GIT/flamegraph/stackcollapse-perf.pl $1.perf > $1.folded
+    ~/GIT/flamegraph/flamegraph.pl $1.folded > $1.svg
+}
+
+#TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
+REPORTTIME=0.1
+TIMEFMT=$'\n%J  %U user %S system %P cpu %*E total'
+

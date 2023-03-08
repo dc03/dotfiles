@@ -2,10 +2,10 @@
 
 sudo sudo > /dev/null 2>&1
 echo "[INFO] CPU Power table"
-sudo $HOME/GIT/RyzenAdj/build/ryzenadj -i
+sudo /home/dc/GIT/RyzenAdj/build/ryzenadj -i
 echo
 echo "[INFO] Laptop performance mode"
-sudo $HOME/GIT/battmngr/battmngr -r
+sudo /home/dc/GIT/battmngr/battmngr -r
 echo
 echo "[INFO] Battery mode"
-sudo $HOME/GIT/battmngr/battmngr -rc
+sudo /home/dc/GIT/battmngr/battmngr -rc

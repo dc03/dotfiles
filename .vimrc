@@ -329,9 +329,9 @@ Plug 'mengelbrecht/lightline-bufferline'
 " LSP and autocomplete
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'mattn/vim-lsp-settings'
+"Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'halkn/lightline-lsp'
 "Plug 'dense-analysis/ale', {'for': ['cpp', 'c']}
 "if has('nvim')
