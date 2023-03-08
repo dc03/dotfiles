@@ -27,11 +27,11 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 function setup {
-    feh --bg-fill "/home/dc/Pictures/Wallpapers/hokusai-non-prompt-landscape-ai-3840×2160.jpg"
-    wal -i "/home/dc/Pictures/Wallpapers/hokusai-non-prompt-landscape-ai-3840×2160.jpg"
+    feh --bg-fill "$HOME/Pictures/Wallpapers/hokusai-non-prompt-landscape-ai-3840×2160.jpg"
+    wal -i "$HOME/Pictures/Wallpapers/hokusai-non-prompt-landscape-ai-3840×2160.jpg"
     picom&
     flameshot&
-    xset +fp /home/dc/.local/share/fonts
+    xset +fp $HOME/.local/share/fonts
     xset fp rehash
     ~/.local/bin/temp-monitor.sh > /dev/null 2>&1 &
     xbindkeys&
@@ -41,7 +41,7 @@ function setup {
 
     #(xautolock -locker "/usr/bin/sh -c 'dunstctl set-paused true && DISPLAY=:1 /usr/local/bin/betterlockscreen --lock blur -- -n && dunstctl set-paused false'" -time 5 -killtime 10 -killer "systemctl suspend" -corners 00-- -detectsleep&)
     xset s 300
-    (env XSECURELOCK_SAVER=saver_xscreensaver XSECURELOCK_SAVER=/home/dc/.local/bin/flux XSECURELOCK_SHOW_DATETIME=1 xss-lock -n /usr/libexec/xsecurelock/dimmer -l -- xsecurelock &)
+    (env XSECURELOCK_SAVER=saver_xscreensaver XSECURELOCK_SAVER=$HOME/.local/bin/flux XSECURELOCK_SHOW_DATETIME=1 xss-lock -n /usr/libexec/xsecurelock/dimmer -l -- xsecurelock &)
     (redshift-gtk -l $(curl ipinfo.io | jq '.loc' | sed 's/"//g' | sed 's/,/:/g') -m randr > /dev/null 2>&1 &)
 #    (kdeconnect-indicator&)
 }
@@ -59,4 +59,4 @@ export SDL_JOYSTICK_HIDAPI=0
 
 
 # Added by Toolbox App
-export PATH="$PATH:/home/dc/.local/share/JetBrains/Toolbox/scripts"
+export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"

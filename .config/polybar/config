@@ -334,7 +334,7 @@ format-padding = 0
 
 click-left = gnome-system-monitor
 click-right = gnome-system-monitor
-exec = '/home/dc/.local/bin/avg-cpu.sh'
+exec = '$HOME/.local/bin/avg-cpu.sh'
 interval = 3
 
 [module/weather_icon]
@@ -345,7 +345,7 @@ format-foreground = ${colors.foreground}
 format-background = ${colors.gradient4}
 format-padding = 2
 
-exec = '/home/dc/.local/bin/get-weather-icon.sh'
+exec = '$HOME/.local/bin/get-weather-icon.sh'
 click-left = polybar-msg action "#weather.module_toggle"
 
 interval = 60
@@ -360,7 +360,7 @@ format-foreground = ${colors.foreground}
 format-background = ${colors.gradient4}
 format-padding = 0
 
-exec = '/home/dc/.local/bin/get-weather.sh'
+exec = '$HOME/.local/bin/get-weather.sh'
 
 interval = 300
 
